@@ -2,7 +2,7 @@ import os
 import sys
 
 import mlflow.sklearn
-
+import pickle
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.logging.logger import logging
 
@@ -53,7 +53,11 @@ class ModelTrainer:
             mlflow.log_metric(f"{stage}_f1_score",f1_score)
             mlflow.log_metric(f"{stage}_precision",precision_score)
             mlflow.log_metric(f"{stage}_recall_score",recall_score)
-            mlflow.sklearn.log_model(best_model,f"{stage}_model")
+            local_model_path = f"final_models/{stage}_model.pkl"
+            with open(local_model_path, 'wb') as f:
+                pickle.dump(best_model, f)
+        
+            mlflow.log_artifact(local_model_path, artifact_path=f"{stage}_model")
 
 
 
