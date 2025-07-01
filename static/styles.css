@@ -163,3 +163,10 @@ button:hover {
     font-size: 14px;
     max-width: 600px;
 }
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
