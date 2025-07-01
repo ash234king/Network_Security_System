@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Train Model</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h2>Train Model</h2>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/train">Train Model</a>
-        <a href="/predict">Predict</a>
-    </nav>
-    <form action="/train-model" method="post">
-        <button type="submit">Start Training</button>
-    </form>
+    <div class="card">
+        <div class="card-logo">
+            <img src="/static/images/logo.png" alt="Logo">
+        </div>
+        <h2>Train Model</h2>
+        <p>Click the button below to train the ML model on current data.</p>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/train">Train</a> |
+            <a href="/predict">Predict</a>
+        </nav>
+        <form action="/train-model" method="post">
+            <button type="submit">Start Training</button>
+        </form>
+    </div>
 </body>
 </html>

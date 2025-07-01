@@ -1,18 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Prediction Result</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h2>Prediction Result</h2>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/train">Train Model</a>
-        <a href="/predict">Predict</a>
-    </nav>
-    <div>
-        {{ table | safe }}
+    <div class="card">
+        <div class="card-logo">
+            <img src="/static/images/logo.png" alt="Logo">
+        </div>
+        <h2>Prediction Result</h2>
+        <p>Predicted results shown below. You can download the CSV or view the prediction chart.</p>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/train">Train</a> |
+            <a href="/predict">Predict</a>
+        </nav>
+        <button onclick="window.location.href='/static/output/output.csv'">Download CSV</button>
+        <br><br>
+        <div>
+            {{ table | safe }}
+        </div>
+        <br>
+        <canvas id="predictionChart" width="400" height="200"></canvas>
+        <script>
+            const ctx = document.getElementById('predictionChart');
+            const labels = Array.from(document.querySelectorAll('.data-table tbody tr')).map((_, i) => `Sample ${i + 1}`);
+            const data = Array.from(document.querySelectorAll('.data-table tbody tr')).map(row => {
+                const pred = row.querySelector('td:last-child')?.textContent.trim();
+                return Number(pred);
+            });
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Prediction Value',
+                        data: data,
+                        backgroundColor: '#007bff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        </script>
     </div>
 </body>
 </html>
