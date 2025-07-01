@@ -123,3 +123,43 @@ button:hover {
     padding: 10px;
     text-align: left;
 }
+.about-section {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-top: 40px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+}
+
+.about-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.about-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* makes it circular */
+    object-fit: cover;
+    border: 3px solid #007BFF;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.about-info h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+}
+
+.about-info p {
+    color: #ddd;
+    font-size: 14px;
+    max-width: 600px;
+}
