@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Train Model</title>
+    <title>Predict</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h2>Train Model</h2>
+    <h2>Predict Network Threat</h2>
     <nav>
         <a href="/">Home</a>
         <a href="/train">Train Model</a>
         <a href="/predict">Predict</a>
     </nav>
-    <form action="/train-model" method="post">
-        <button type="submit">Start Training</button>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form action="/predict-data" enctype="multipart/form-data" method="post">
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Upload and Predict</button>
     </form>
 </body>
 </html>
