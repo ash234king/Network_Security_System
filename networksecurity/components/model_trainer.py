@@ -23,8 +23,15 @@ from sklearn.ensemble import(
     RandomForestClassifier
 )
 import mlflow
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
+os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 import dagshub
 dagshub.init(repo_owner='yashvardhansingh9532', repo_name='Network_Security_System', mlflow=True)
+
 
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTranformationArtifact):
@@ -34,16 +41,19 @@ class ModelTrainer:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
     
-    def track_mlflow(self,best_model,Classifiactionmetric):
+    def track_mlflow(self,best_model,Classifiactionmetric,stage="train"):
+        mlflow.set_experiment("NetworkSecurityExperiment")
         with mlflow.start_run():
+            mlflow.set_tag("stage",stage)
+            mlflow.set_tag("model_name",best_model.__class__.__name__)
             f1_score=Classifiactionmetric.f1_score
             precision_score=Classifiactionmetric.precision_score
             recall_score=Classifiactionmetric.recall_score
 
-            mlflow.log_metric("f1_score",f1_score)
-            mlflow.log_metric("precison",precision_score)
-            mlflow.log_metric("recall_score",recall_score)
-            mlflow.sklearn.log_model(best_model,"model")
+            mlflow.log_metric(f"{stage}_f1_score",f1_score)
+            mlflow.log_metric(f"{stage}_precision",precision_score)
+            mlflow.log_metric(f"{stage}_recall_score",recall_score)
+            mlflow.sklearn.log_model(best_model,f"{stage}_model")
 
 
 
@@ -97,11 +107,11 @@ class ModelTrainer:
         classification_train_metric=get_classification_score(y_true=y_train,y_pred=y_train_pred)
         
         ##function to track the mlflow
-        self.track_mlflow(best_model,classification_train_metric)
+        self.track_mlflow(best_model,classification_train_metric,stage="train")
 
         y_test_pred=best_model.predict(x_test)
         classification_test_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred)
-        self.track_mlflow(best_model,classification_train_metric)
+        self.track_mlflow(best_model,classification_test_metric,stage="test")
         preprocessor=load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
         model_dir_path=os.path.dirname(self.model_trainer_config.trained_model_file_path)
         os.makedirs(model_dir_path,exist_ok=True)
