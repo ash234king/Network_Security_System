@@ -23,7 +23,8 @@ from sklearn.ensemble import(
     RandomForestClassifier
 )
 import mlflow
-
+import dagshub
+dagshub.init(repo_owner='yashvardhansingh9532', repo_name='my-first-repo', mlflow=True)
 
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTranformationArtifact):
@@ -34,7 +35,7 @@ class ModelTrainer:
             raise NetworkSecurityException(e,sys)
     
     def track_mlflow(self,best_model,Classifiactionmetric):
-        with mlflow.start_run:
+        with mlflow.start_run():
             f1_score=Classifiactionmetric.f1_score
             precision_score=Classifiactionmetric.precision_score
             recall_score=Classifiactionmetric.recall_score
@@ -69,22 +70,20 @@ class ModelTrainer:
             "Gradient Boosting":{
                 'loss':['log_loss','exponential'],
                 'learning_rate':[.1,.01,.05,.001],
-                'subsample':[0.6,0.7,0.75,0.8,0.85,0.9],
+                'subsample':[0.6,0.7,0.75,0.8,0.85],
                 'criterion':['squared_error','friedman_mse'],
                 'max_features':['auto','sqrt','log2'],
-                'n_estimators':[8,16,32,4,128,256]
+                'n_estimators':[8,16,32,64,128]
             },
             "Logistic Regression":{},
             "Adaboost":{
                 'learning_rate':[.1,.01,0.5,.001],
-                'n_estimators':[8,16,32,64,128,256]
+                'n_estimators':[8,16,32,64,128]
             },
             "Kneighbors Classifier":{
                 'n_neighbors': [3, 5, 7, 9, 11],
                 'weights': ['uniform', 'distance'],
                 'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
-                'p': [1, 2],
-                'leaf_size': [20, 30, 40],
                 'metric': ['minkowski', 'euclidean', 'manhattan']
             }
         }
@@ -108,6 +107,7 @@ class ModelTrainer:
         os.makedirs(model_dir_path,exist_ok=True)
         Network_Model=NetworkModel(preprocessor=preprocessor,model=best_model)
         save_object(self.model_trainer_config.trained_model_file_path,obj=NetworkModel)
+        save_object("final_models/model.pkl",best_model)
 
         ##Model trainer Artifact
         model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,

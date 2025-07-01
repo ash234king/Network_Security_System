@@ -84,9 +84,10 @@ def evaluate_models(x_train,y_train,x_test,y_test,models,param):
                 random_state=42
             )
             gs.fit(x_train,y_train)
-            best_model=gs.best_estimator_
-            y_train_pred=best_model.predict(x_train)
-            y_test_pred=best_model.predict(x_test)
+            model.set_params(**gs.best_params_)
+            model.fit(x_train,y_train)
+            y_train_pred=model.predict(x_train)
+            y_test_pred=model.predict(x_test)
             train_model_score=r2_score(y_train,y_train_pred)
             test_model_score=r2_score(y_test,y_test_pred)
             report[model_name]=test_model_score
