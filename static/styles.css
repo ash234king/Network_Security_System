@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     padding: 0;
@@ -12,22 +13,19 @@ body {
 
 
 .card {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 40px 30px;
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 50px 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     text-align: center;
     max-width: 600px;
     width: 90%;
-    animation: floatCard 6s ease-in-out infinite;
-    transform-style: preserve-3d;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    position: relative;
 }
 
 
-@keyframes floatCard {
-    0%, 100% { transform: rotateY(0deg); }
-    50% { transform: rotateY(8deg); }
-}
 
 .card-logo {
     width: 120px;
@@ -36,8 +34,13 @@ body {
     overflow: hidden;
     margin: 0 auto 20px;
     border: 5px solid #007BFF;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    animation: rotateLogo 8s linear infinite;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: pulseLogo 3s ease-in-out infinite;
+}
+
+@keyframes pulseLogo {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .card-logo img {
@@ -46,41 +49,49 @@ body {
     object-fit: cover;
 }
 
-@keyframes rotateLogo {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
+
+h1, h2 {
+    color: #003366;
+    margin-bottom: 10px;
 }
 
-
-h1, h2, p {
-    color: #333;
-    margin: 10px 0;
+p {
+    color: #444;
+    font-size: 16px;
 }
-
 
 nav {
     margin: 15px 0;
 }
+
 nav a {
     margin: 0 10px;
     text-decoration: none;
-    color: darkblue;
+    color: #007BFF;
     font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #0056b3;
 }
 
 
 form {
     margin-top: 20px;
 }
+
 button {
-    padding: 10px 20px;
+    padding: 10px 22px;
     font-weight: bold;
     border: none;
     background-color: #007BFF;
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
 button:hover {
     background-color: #0056b3;
 }
@@ -90,8 +101,30 @@ button:hover {
     border-collapse: collapse;
     width: 100%;
 }
+
 .data-table th, .data-table td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
+}
+
+
+#drop-area {
+    border: 2px dashed #aaa;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    background-color: rgba(240, 240, 240, 0.6);
+    color: #555;
+}
+
+
+.table-wrapper {
+    margin-top: 20px;
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
 }
