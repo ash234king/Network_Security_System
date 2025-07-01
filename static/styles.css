@@ -1,8 +1,7 @@
-/* Background and layout */
 body {
     margin: 0;
     padding: 0;
-    background: url('/static/images/bg.jpg') no-repeat center center fixed;
+    background: url('/static/images/bg.png') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
     height: 100vh;
@@ -11,7 +10,7 @@ body {
     align-items: center;
 }
 
-/* Card structure */
+
 .card {
     background-color: rgba(255, 255, 255, 0.95);
     padding: 40px 30px;
@@ -24,13 +23,12 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Card floating animation */
+
 @keyframes floatCard {
     0%, 100% { transform: rotateY(0deg); }
     50% { transform: rotateY(8deg); }
 }
 
-/* Circular logo with rotation */
 .card-logo {
     width: 120px;
     height: 120px;
@@ -48,19 +46,18 @@ body {
     object-fit: cover;
 }
 
-/* Logo rotating animation */
 @keyframes rotateLogo {
     0% { transform: rotateY(0deg); }
     100% { transform: rotateY(360deg); }
 }
 
-/* Typography */
+
 h1, h2, p {
     color: #333;
     margin: 10px 0;
 }
 
-/* Navigation */
+
 nav {
     margin: 15px 0;
 }
@@ -71,7 +68,7 @@ nav a {
     font-weight: bold;
 }
 
-/* Forms and inputs */
+
 form {
     margin-top: 20px;
 }
@@ -88,7 +85,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Table styling for prediction result */
+
 .data-table {
     border-collapse: collapse;
     width: 100%;
