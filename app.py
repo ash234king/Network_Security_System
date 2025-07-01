@@ -46,6 +46,8 @@ app.add_middleware(
 
 from fastapi.templating import Jinja2Templates
 templates = Jinja2Templates(directory="./templates")
+from fastapi.staticfiles import StaticFiles
+app.mount("/static",StaticFiles(directory="static"),name="static")
 
 @app.get("/", tags=["navigation"])
 async def home(request:Request):
@@ -64,7 +66,7 @@ async def train_route():
     except Exception as e:
         raise NetworkSecurityException(e,sys)
     
-@app.post("/predict",tags=["prediction"])
+@app.get("/predict",tags=["prediction"])
 def predict_page(request:Request):
      return templates.TemplateResponse("predict.html",{"request":request})
 
