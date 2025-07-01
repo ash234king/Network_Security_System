@@ -1,5 +1,7 @@
 import sys
 import os
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 import certifi
 ca = certifi.where()
@@ -23,7 +25,7 @@ import pandas as pd
 from networksecurity.utils.main_utils.utils import load_object
 
 from networksecurity.utils.ml_utils.model.estimator import NetworkModel
-
+from networksecurity.EDA.eda_processor import EDAProcessor
 
 client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
 
@@ -88,12 +90,18 @@ async def predict_route(request: Request,file: UploadFile = File(...)):
         #df['predicted_column'].replace(-1, 0)
         #return df.to_json()
         df.to_csv('prediction_output/output.csv')
+        from networksecurity.EDA.eda_processor import EDAProcessor
+        eda=EDAProcessor(df)
+        eda.run_all()
         table_html = df.to_html(classes='data-table')
         #print(table_html)
-        return templates.TemplateResponse("table.html", {"request": request, "table": table_html})
-        
+        return templates.TemplateResponse("table.html", {"request": request, "table": table_html})     
     except Exception as e:
             raise NetworkSecurityException(e,sys)
+
+@app.get("/data-analysis", tags=["eda"])
+async def perform_eda(request: Request):
+     return templates.TemplateResponse("data_analysis.html", {"request": request})
 
     
 if __name__=="__main__":

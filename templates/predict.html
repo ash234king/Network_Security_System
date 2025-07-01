@@ -24,7 +24,8 @@
         <nav>
             <a href="/">Home</a> |
             <a href="/train">Train</a> |
-            <a href="/predict">Predict</a>
+            <a href="/predict">Predict</a> |
+            <a href="/data-analysis">Data Analysis</a>
         </nav>
         {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
         <form action="/predict-data" enctype="multipart/form-data" method="post">
@@ -34,6 +35,9 @@
             <input type="file" name="file" accept=".csv" required><br><br>
             <button type="submit">Upload and Predict</button>
         </form>
+    </div>
+    <div class="section-divider">
+        <h2>About Me</h2>
     </div>
     <footer class="about-section">
         <div class="about-card">

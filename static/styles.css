@@ -4,14 +4,14 @@ body {
     background: url('/static/images/bg.png') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    display: block;
 }
 
+
 .card {
-    background: rgba(0, 20, 50, 0.75); /* dark glassy card */
+    margin: 100px auto 160px auto; 
+    background: rgba(0, 20, 50, 0.75);
     padding: 50px 40px;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
@@ -23,6 +23,7 @@ body {
     position: relative;
     color: #f0f0f0;
 }
+
 
 .card-logo {
     width: 120px;
@@ -91,7 +92,7 @@ button:hover {
     background-color: #008fcc;
 }
 
-/* CSV drop area */
+
 #drop-area {
     border: 2px dashed #aaa;
     padding: 20px;
@@ -101,7 +102,7 @@ button:hover {
     color: #ddd;
 }
 
-/* Prediction Table inside card */
+
 .table-wrapper {
     margin-top: 20px;
     overflow-x: auto;
@@ -123,43 +124,68 @@ button:hover {
     padding: 10px;
     text-align: left;
 }
-.about-section {
-    background-color: rgba(255, 255, 255, 0.1);
-    margin-top: 40px;
-    padding: 30px;
+
+.section-divider {
+    width: 100%;
     text-align: center;
-    color: white;
+    margin: 80px 0 5px 0;
+}
+
+.section-divider h2 {
+    display: inline-block;
+    font-size: 26px;
+    padding: 12px 28px;
+    border-bottom: 3px solid #00bfff;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 10px rgba(0, 191, 255, 0.3);
+}
+
+.about-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+    margin-top: 30px;
 }
 
 .about-card {
+    background: rgba(0, 20, 50, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 30px;
+    gap: 25px;
+    max-width: 800px;
+    width: 90%;
+    color: #f0f0f0;
     flex-wrap: wrap;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: left;
 }
 
 .about-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* makes it circular */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #007BFF;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 3px solid #00bfff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .about-info h3 {
-    margin: 0;
+    margin: 0 0 5px;
     font-size: 20px;
-    color: #fff;
+    color: #ffffff;
 }
 
 .about-info p {
-    color: #ddd;
+    margin: 3px 0;
+    color: #ccc;
     font-size: 14px;
     max-width: 600px;
 }
@@ -169,4 +195,16 @@ button:hover {
     flex-direction: column;
     align-items: center;
     padding: 40px 20px;
+}
+
+.eda-section {
+    margin-top: 40px;
+}
+
+.eda-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
