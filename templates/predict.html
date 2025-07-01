@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prediction Result</title>
+    <title>Train Model</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h2>Prediction Result</h2>
+    <h2>Train Model</h2>
     <nav>
         <a href="/">Home</a>
         <a href="/train">Train Model</a>
         <a href="/predict">Predict</a>
     </nav>
-    <div>
-        {{ table | safe }}
-    </div>
+    <form action="/train-model" method="post">
+        <button type="submit">Start Training</button>
+    </form>
 </body>
 </html>

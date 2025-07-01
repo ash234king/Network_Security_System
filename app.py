@@ -47,22 +47,32 @@ app.add_middleware(
 from fastapi.templating import Jinja2Templates
 templates = Jinja2Templates(directory="./templates")
 
-@app.get("/", tags=["authentication"])
-async def index():
-    return RedirectResponse(url="/docs")
+@app.get("/", tags=["navigation"])
+async def home(request:Request):
+    return templates.TemplateResponse("index.html",{"request":request})
 
-@app.get("/train")
+@app.get("/train",tags=["training"])
+async def train_page(request:Request):
+     return templates.TemplateResponse("train.html",{"request":request})
+
+@app.post("/train-model",tags=["training"])
 async def train_route():
     try:
         train_pipeline=TrainingPipeline()
         train_pipeline.run_pipeline()
-        return Response("Training is successful")
+        return RedirectResponse(url="/train",status_code=303)
     except Exception as e:
         raise NetworkSecurityException(e,sys)
     
-@app.post("/predict")
+@app.post("/predict",tags=["prediction"])
+def predict_page(request:Request):
+     return templates.TemplateResponse("predict.html",{"request":request})
+
+@app.post("/predict-data",tags=["prediction"])
 async def predict_route(request: Request,file: UploadFile = File(...)):
     try:
+        if not file.filename.endswith('.csv'):
+             return templates.TemplateResponse("predict.html",{"request":request,"error":"Please upload the csv file."})
         df=pd.read_csv(file.file)
         #print(df)
         preprocesor=load_object("final_models/preprocessor.pkl")
