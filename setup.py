@@ -2,16 +2,12 @@ from setuptools import find_packages,setup
 from typing import List
 
 def get_requirements()->List[str]:
-    """
-    This function will return list of components
-    """
     requirement_list:List[str]=[]
     try:
         with open('requirements.txt','r',encoding='utf-8') as file:
             lines=file.readlines()
             for line in lines:
                 requirement=line.strip()
-                ##ignore empty lines and -e .
                 if requirement and not requirement.startswith("#") and requirement!='-e .':
                     requirement_list.append(requirement)
     except FileNotFoundError:
