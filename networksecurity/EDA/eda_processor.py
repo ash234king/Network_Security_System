@@ -50,7 +50,48 @@ class EDAProcessor:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
+    def generate_corr_heatmap(self):
+        try:
+            plt.figure(figsize=(10, 8))
+            corr = self.df.corr()
+            sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
+            plt.title("Correlation Matrix")
+            plt.tight_layout()
+            plt.savefig(os.path.join(self.output_dir, "correlation_heatmap.png"))
+            plt.close()
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)
+        
+    def generate_violin_plots(self):
+        try:
+            for col in self.df.select_dtypes(include='number').columns[:1]:
+                plt.figure(figsize=(6, 4))
+                sns.violinplot(y=self.df[col], color='purple')
+                plt.title(f"Violin Plot of {col}")
+                plt.tight_layout()
+                filepath = os.path.join(self.output_dir, "violin_plot.png")
+                plt.savefig(filepath)
+                plt.close()
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)
+
+    def generate_box_plots(self):
+        try:
+            for col in self.df.select_dtypes(include='number').columns[:1]:
+                plt.figure(figsize=(6, 4))
+                sns.boxplot(y=self.df[col], color='green')
+                plt.title(f"Box Plot of {col}")
+                plt.tight_layout()
+                filepath = os.path.join(self.output_dir, f"box_plot.png")
+                plt.savefig(filepath)
+                plt.close()
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)
+        
     def run_all(self):
         self.generate_bar_plot()
         self.generate_pie_chart()
         self.generate_frequency_chart()
+        self.generate_box_plots()
+        self.generate_corr_heatmap()
+        self.generate_violin_plots()
