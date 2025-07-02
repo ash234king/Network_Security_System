@@ -145,19 +145,19 @@ plt.show()
 
 
 ##violinplots
-sns.violinplot(df['SSLfinal_State'])
+sns.violinplot(y=df['SSLfinal_State'],color='pink')
 plt.title('Distribution of SSLfinal_State')
 plt.show()
 ##Insights 
 ## most of the sites given are 1 i.e valid      because the stretch is more at 1
 
-sns.violinplot(df['URL_of_Anchor'])
+sns.violinplot(y=df['URL_of_Anchor'],color='red')
 plt.title('Distribution of URL of anchor')  
 plt.show()
 ##Insights 
 ## most of the sites given are 0 i.e suspicious      because the stretch is more at 0
 
-sns.violinplot(df['URL_Length'])
+sns.violinplot(y=df['URL_Length'],color='purple')
 plt.title('Distribution of URL length')
 plt.show()
 ##Insights
