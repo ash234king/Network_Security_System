@@ -23,13 +23,13 @@ from sklearn.ensemble import(
     RandomForestClassifier
 )
 import mlflow
-from dotenv import load_dotenv
-load_dotenv()
+if os.path.exists(".env"):
+    from dotenv import load_dotenv
+    load_dotenv()
 
-import os
-os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
-os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
-mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI")) 
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.environ["MLFLOW_TRACKING_USERNAME"]
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.environ["MLFLOW_TRACKING_PASSWORD"]
+os.environ["MLFLOW_TRACKING_URI"] = os.environ["MLFLOW_TRACKING_URI"]
 import dagshub
 dagshub.init(repo_owner='yashvardhansingh9532', repo_name='Network_Security_System', mlflow=True)
 
