@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb
+.DS_Store
+.env
+.git
+.gitignore
+notebook/
+venv/
+logs/
