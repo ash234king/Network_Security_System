@@ -23,14 +23,17 @@ from sklearn.ensemble import(
     RandomForestClassifier
 )
 import mlflow
-if os.path.exists(".env"):
-    from dotenv import load_dotenv
-    load_dotenv()
+from urllib.parse import urlparse
+from dotenv import load_dotenv
+load_dotenv(dotenv_path=".env")
 
-os.environ["MLFLOW_TRACKING_USERNAME"] = os.environ["MLFLOW_TRACKING_USERNAME"]
-os.environ["MLFLOW_TRACKING_PASSWORD"] = os.environ["MLFLOW_TRACKING_PASSWORD"]
-import dagshub
-dagshub.init(repo_owner='yashvardhansingh9532', repo_name='Network_Security_System', mlflow=True)
+print("MLFLOW_TRACKING_USERNAME:", os.getenv("MLFLOW_TRACKING_USERNAME"))
+print("MLFLOW_TRACKING_PASSWORD:", os.getenv("MLFLOW_TRACKING_PASSWORD"))
+print("MLFLOW_TRACKING_URI:", os.getenv("MLFLOW_TRACKING_URI"))
+
+os.environ["MLFLOW_TRACKING_URI"]=os.getenv("MLFLOW_TRACKING_URI")
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD")
 
 
 class ModelTrainer:
@@ -42,7 +45,8 @@ class ModelTrainer:
             raise NetworkSecurityException(e,sys)
     
     def track_mlflow(self,best_model,Classifiactionmetric,stage="train"):
-        mlflow.set_experiment("NetworkSecurityExperiment")
+        mlflow.set_registry_uri("MLFLOW_TRACKING_URI")
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         with mlflow.start_run():
             mlflow.set_tag("stage",stage)
             mlflow.set_tag("model_name",best_model.__class__.__name__)
