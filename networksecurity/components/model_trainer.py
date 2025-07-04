@@ -29,7 +29,6 @@ if os.path.exists(".env"):
 
 os.environ["MLFLOW_TRACKING_USERNAME"] = os.environ["MLFLOW_TRACKING_USERNAME"]
 os.environ["MLFLOW_TRACKING_PASSWORD"] = os.environ["MLFLOW_TRACKING_PASSWORD"]
-os.environ["MLFLOW_TRACKING_URI"] = os.environ["MLFLOW_TRACKING_URI"]
 import dagshub
 dagshub.init(repo_owner='yashvardhansingh9532', repo_name='Network_Security_System', mlflow=True)
 
