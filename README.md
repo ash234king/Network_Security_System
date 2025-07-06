@@ -108,3 +108,70 @@ Include these variables in your `.env` file or environment configuration on AWS:
 
 ## 📁 Project Structure
 
+
+```bash
+.
+├── .ebextensions/               # AWS Elastic Beanstalk Docker configuration
+│   └── docker.config
+├── .github/
+│   └── workflows/
+│       └── main.yml             # CI/CD GitHub Actions workflow
+├── data_schema/
+│   └── schema.yml               # Schema for data validation
+├── final_models/
+│   ├── model.pkl
+│   ├── preprocessor.pkl
+│   ├── test_model.pkl
+│   └── train_model.pkl
+├── Network_Data/
+│   └── phishing data.csv        # Original dataset
+├── network_security/
+│   ├── components/              # Pipeline stages
+│   │   ├── data_ingestion.py
+│   │   ├── data_validation.py
+│   │   ├── data_transformation.py
+│   │   └── model_training.py
+│   ├── constant/
+│   │   └── training_pipeline/
+│   │       └── constants for schema, filenames, etc.
+│   ├── eda/
+│   │   └── eda.py               # Dynamic EDA generation
+│   ├── entity/
+│   │   ├── artifact_entity.py
+│   │   └── config_entity.py
+│   ├── exception/
+│   │   └── exception.py
+│   ├── logging/
+│   │   └── logger.py
+│   ├── pipeline/
+│   │   └── training_pipeline.py
+│   └── utils/
+│       ├── ml_utils/
+│       │   ├── metric/
+│       │   │   └── precision, recall, F1 score scripts
+│       │   └── estimator/
+│       └── main_utils.py
+├── notebooks/
+│   └── eda_notebook.ipynb       # EDA on original dataset
+├── prediction_output/
+│   └── *.csv                    # Predicted output data
+├── static/
+│   ├── style.css
+│   ├── eda_outputs/             # EDA plots on uploaded data
+│   └── images/                  # Background/logo/author images
+├── templates/
+│   ├── index.html
+│   ├── predict.html
+│   ├── train.html
+│   ├── table.html
+│   └── data_analysis.html
+├── valid_data/
+│   └── test.csv                 # Sample data for testing predictions
+├── .dockerignore
+├── .gitignore
+├── app.py                       # FastAPI entrypoint
+├── Dockerfile
+├── push_data.py                # Script to upload data to MongoDB
+├── README.md
+├── requirements.txt
+└── setup.py
