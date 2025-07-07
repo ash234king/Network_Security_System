@@ -152,7 +152,7 @@ Include these variables in your `.env` file or environment configuration on AWS:
 │       │   └── estimator/
 │       └── main_utils.py
 ├── notebooks/
-│   └── eda_notebook.ipynb       # EDA on original dataset
+│   └── eda_notebook.py       # EDA on original dataset
 ├── prediction_output/
 │   └── *.csv                    # Predicted output data
 ├── static/
