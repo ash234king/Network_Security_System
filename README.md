@@ -102,7 +102,7 @@ Include these variables in your `.env` file or environment configuration on AWS:
 
 - ✅ Dockerfile builds and runs FastAPI app
 - ✅ Image pushed to Docker Hub
-- ✅ Deployed on **AWS Elastic Beanstalk** using `Dockerrun.aws.json`
+- ✅ Deployed on **AWS Elastic Beanstalk** 
 
 ---
 
