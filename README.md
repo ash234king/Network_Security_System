@@ -51,11 +51,11 @@ This project builds an end-to-end **Network Security System** that identifies wh
 | 🛠️ Train Model  | Retrain models using the complete ML pipeline             |
 | 🧠 Prediction   | Upload CSV and predict phishing sites                     |
 | 📊 Data Analysis| Display EDA charts (bar, violin, heatmap, pie, etc.)      |
-| 👤 About Me     | Short personal description (included on all pages)        |
+| 👤 About Me     | Short personal and app description  (included on all pages)        |
 
 ---
 
-## 📈 EDA Visuals
+## 📈 EDA Visuals on first feature 
 
 - 📊 Bar Chart  
 - 🎻 Violin Plot  
